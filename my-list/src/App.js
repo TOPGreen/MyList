@@ -1,12 +1,25 @@
 import React from 'react';
 import logo from './logo.svg';
-import HeaderComponent from './components/HeaderComponent'
 import './App.css';
+import { BrowserRouter as Router, Redirect, Route, Link } from 'react-router-dom';
+import HeaderComponent from './components/HeaderComponent';
+import ListView from './components/ListView';
+import MainView from './components/MainView';
+
+
+
 
 class App extends React.Component {
   render() {
     return (
-      <HeaderComponent />
+      <div className="App">
+        <Router>
+          <HeaderComponent />
+          <Route exact path="/" component={MainView} />
+          <Route exact path="/films" render={(props) => <ListView {...props} topic="films" />} />
+          <Route exact path="/series" render={(props) => <ListView {...props} topic="series" />} />
+        </Router>
+      </div>
     );
   }
 }
