@@ -12,35 +12,35 @@ class ListView extends React.Component {
                 id: "1",
                 name: "Бремя",
                 description: "description of this film",
-                trailer: "https://www.youtube.com/watch?v=boBAotgcQ88",
+                trailer: "https://www.youtube.com/embed/boBAotgcQ88",
                 genre: "drama",
             },
             {
                 id: "2",
-                name: "film2",
+                name: "Тебя здесь никогда не было",
                 description: "description of this film",
-                trailer: "",
+                trailer: "https://www.youtube.com/embed/cZP0kY-ksfQ",
                 genre: "comedy",
             },
             {
                 id: "3",
-                name: "film3",
+                name: "Свет моей жизни",
                 description: "description of this film",
-                trailer: "",
+                trailer: "https://www.youtube.com/embed/zU2d6pLLtZc",
                 genre: "fantasy",
             },
         ],
         series: [
             {
                 id: "1",
-                name: "series1",
+                name: "Ведьмак",
                 description: "description of this series",
-                trailer: "",
+                trailer: "https://www.youtube.com/embed/EUizTA1nrfA",
                 genre: "detective",
             },
             {
                 id: "2",
-                name: "series1",
+                name: "series2",
                 description: "description of this series",
                 trailer: "",
                 genre: "fantasy",
@@ -70,18 +70,21 @@ class ListView extends React.Component {
 
     render() {
         return (
-            <div className="row">
-                <div id="listView" className="col-3">
-                    {this.state.topic}
+          
+            <div>
+                <h2>{this.state.topic}</h2>
+                <div className="row">
+                <div id="listView" className="col-4">
                     <div className="list-group">
                         {this.state.items.map((item) => <ListItem item={item} key={item.id} />)}
                     </div>
                 </div >
-                {/* <div id="videoPlayer" className="col-6">
-                    <iframe title="video" id="video" type="text/html" width="640" height="360"
-                        src="https://www.youtube.com/watch?v=boBAotgcQ88/"
-                        frameborder="0" />
-                </div> */}
+                <div id="videoPlayer" className="col-6">
+                    <iframe id="video" width="560" height="315" src=""
+                        frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; 
+                        picture-in-picture" allowfullscreen></iframe>
+                </div>
+                </div>
             </div>
 
         )

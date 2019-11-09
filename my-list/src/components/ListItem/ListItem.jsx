@@ -27,7 +27,7 @@ class ListItem extends React.Component {
     }
 
     showTrailer = () => {
-        // document.querySelector("#video").src = this.state.item.trailer;
+        document.querySelector("#video").src = this.state.item.trailer;
     }
 
 }
