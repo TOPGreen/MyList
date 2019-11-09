@@ -3,74 +3,43 @@ import "bootstrap/dist/css/bootstrap.css";
 import ListItem from "../ListItem"
 import './ListView.css';
 
+import {getItems} from '../../services/itemsService'
+    
+
+
 class ListView extends React.Component {
 
     state = {
         items: [],
-        films: [
-            {
-                id: "1",
-                name: "Бремя",
-                description: "description of this film",
-                trailer: "https://www.youtube.com/embed/boBAotgcQ88",
-                genre: "drama",
-            },
-            {
-                id: "2",
-                name: "Тебя здесь никогда не было",
-                description: "description of this film",
-                trailer: "https://www.youtube.com/embed/cZP0kY-ksfQ",
-                genre: "comedy",
-            },
-            {
-                id: "3",
-                name: "Свет моей жизни",
-                description: "description of this film",
-                trailer: "https://www.youtube.com/embed/zU2d6pLLtZc",
-                genre: "fantasy",
-            },
-        ],
-        series: [
-            {
-                id: "1",
-                name: "Ведьмак",
-                description: "description of this series",
-                trailer: "https://www.youtube.com/embed/EUizTA1nrfA",
-                genre: "detective",
-            },
-            {
-                id: "2",
-                name: "series2",
-                description: "description of this series",
-                trailer: "",
-                genre: "fantasy",
-            },
-            {
-                id: "3",
-                name: "series3",
-                description: "description of this series",
-                trailer: "",
-                genre: "thriller",
-            },
-        ]
+        isEmpty:true
     };
 
     constructor(props) {
         super(props);
         this.state.topic = props.topic;
-        if (this.state.topic === "films") {
-            this.state.items = this.state.films;
+     
+     
+
+    }
+    componentDidMount(){  
+        if(this.state.topic){
+            getItems(this.state.topic)
+            .then(res =>{
+                this.setState({items:res.data, isEmpty:false})
+                console.log(this.state.items)
+            })
+            .catch(rej=>{
+                console.log(rej)
+            });
         } else {
             this.state.items = this.state.series;
         }
-
     }
 
-
-
+   
     render() {
+        if(!this.state.isEmpty){
         return (
-          
             <div>
                 <h2>{this.state.topic}</h2>
                 <div className="row">
@@ -81,13 +50,16 @@ class ListView extends React.Component {
                 </div >
                 <div id="videoPlayer" className="col-6">
                     <iframe id="video" width="560" height="315" src=""
-                        frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; 
-                        picture-in-picture" allowfullscreen></iframe>
+                        frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; 
+                        picture-in-picture" allowFullScreen></iframe>
                 </div>
                 </div>
             </div>
 
         )
+        } else{
+            return( <h2></h2>);
+        }
     }
 
 }

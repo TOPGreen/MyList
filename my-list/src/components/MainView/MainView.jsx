@@ -5,9 +5,7 @@ class MainView extends React.Component {
 
     render() {
         return (
-            <div id="listView">
-                Main View
-            </div>
+            <h2>Main</h2>
         )
     }
 
