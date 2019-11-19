@@ -17,9 +17,6 @@ class ListView extends React.Component {
     constructor(props) {
         super(props);
         this.state.topic = props.topic;
-     
-     
-
     }
     componentDidMount(){  
         if(this.state.topic){
@@ -28,7 +25,7 @@ class ListView extends React.Component {
                 this.setState({items:res.data, isEmpty:false})
                 console.log(this.state.items)
             })
-            .catch(rej=>{
+            .catch(rej =>{
                 console.log(rej)
             });
         } else {
@@ -41,18 +38,20 @@ class ListView extends React.Component {
         if(!this.state.isEmpty){
         return (
             <div>
-                <h2>{this.state.topic}</h2>
                 <div className="row">
-                <div id="listView" className="col-4">
-                    <div className="list-group">
-                        {this.state.items.map((item) => <ListItem item={item} key={item.id} />)}
+                    <div id="listView" className="col-3">
+                        <div className="list-group">
+                            {this.state.items.map((item) => <ListItem item={item} key={item.id} />)}
+                        </div>
+                    </div >
+                    <div id="infoView" className="col-9 offset-3">
+                        <h3>Трейлер</h3>
+                        <iframe id="video" width="560" height="315" src=""
+                            frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; 
+                            picture-in-picture" allowFullScreen></iframe>
+                        <h3>Описание</h3>
+                        <p id="description"></p>
                     </div>
-                </div >
-                <div id="videoPlayer" className="col-6">
-                    <iframe id="video" width="560" height="315" src=""
-                        frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; 
-                        picture-in-picture" allowFullScreen></iframe>
-                </div>
                 </div>
             </div>
 

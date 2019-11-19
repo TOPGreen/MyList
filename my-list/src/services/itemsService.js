@@ -11,15 +11,9 @@ export function getItems(topic) {
     });
 }
 
-export function addItem(topic, form) {
+export function addItem(topic, data) {
     return new Promise((res, rej) => {
-        const bodyFormData = new FormData([form]);
-        axios({
-            method: 'post',
-            url: `${serverURL}/${topic}`,
-            data: bodyFormData,
-            config: { headers: { 'Content-Type': 'multipart/form-data' } }
-        })
+        axios.post(`${serverURL}/${topic}`, data)
             .then(res)
             .catch(rej);
     });

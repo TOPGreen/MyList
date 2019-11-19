@@ -1,41 +1,4 @@
 {
-  "films": [
-    {
-      "id": "1",
-      "name": "Бремя",
-      "description": "description of this film",
-      "trailer": "https://www.youtube.com/embed/boBAotgcQ88",
-      "genre": "drama"
-    },
-    {
-      "id": "2",
-      "name": "Тебя здесь никогда не было",
-      "description": "description of this film",
-      "trailer": "https://www.youtube.com/embed/cZP0kY-ksfQ",
-      "genre": "comedy"
-    },
-    {
-      "id": "3",
-      "name": "Свет моей жизни",
-      "description": "description of this film",
-      "trailer": "https://www.youtube.com/embed/zU2d6pLLtZc",
-      "genre": "fantasy"
-    }
-  ],
-  "series": [
-    {
-      "id": "1",
-      "name": "Конец ***го мира",
-      "description": "description of this film",
-      "trailer": "https://www.youtube.com/embed/xBJCON-_7H4",
-      "genre": "drama"
-    },
-    {
-      "id": "2",
-      "name": "Оставленные",
-      "description": "description of this film",
-      "trailer": "https://www.youtube.com/embed/yuIpRPGcobI",
-      "genre": "drama"
-    }
-  ]
+  "films": [],
+  "series": []
 }
