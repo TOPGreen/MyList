@@ -1,11 +1,12 @@
 #listView {
-    overflow-y: scroll;
+    overflow-y: hidden;
     overflow-x: hidden;
 
 }
 
 #infoView {
     position: fixed;
+    display: none;
 }
 
 body {

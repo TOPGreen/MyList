@@ -2,18 +2,18 @@ import React from 'react';
 import "bootstrap/dist/css/bootstrap.css";
 import { addItem } from "../../services/itemsService"
 import { getFilm } from '../../services/omdbService';
-import "./style.css"
+import "./NewItemView.css"
 import { Redirect } from 'react-router-dom';
 class NewItemView extends React.Component {
 
     state = {
         name: '',
         trailer: '',
-        genre: 'Ужасы',
-        description: '',
+        genre: 'Horror',
+        plot: '',
         poster: ''
     }
-    topic = 'films';
+    type = 'movies';
 
     constructor(props) {
         super(props)
@@ -21,22 +21,26 @@ class NewItemView extends React.Component {
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handleTrailerChange = this.handleTrailerChange.bind(this);
         this.handleGenreChange = this.handleGenreChange.bind(this);
-        this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
+        this.handlePlotChange = this.handlePlotChange.bind(this);
         this.handlePosterChange = this.handlePosterChange.bind(this);
-        this.handleTopicChange = this.handleTopicChange.bind(this);
+        this.handleTypeChange = this.handleTypeChange.bind(this);
         this.handleSearchChange = this.handleSearchChange.bind(this);
     }
 
     handleSubmit(event) {
-        addItem(this.topic, this.state)
-            .then(res => {
-                console.log("good");
-                return (<Redirect to="/films" />)
-            })
-            .catch(rej => {
-                console.log("bad")
-            });
-
+        if (this.state.name != "" && this.state.trailer != "" && document.querySelector("#search").checked
+            || this.state.name != "" && this.state.trailer != "" && this.state.genre != "" && this.state.plot != "" && this.state.poster != "") {
+            addItem(this.type, this.state)
+                .then(res => {
+                    console.log("good");
+                    return (<Redirect to="/movies" />)
+                })
+                .catch(rej => {
+                    console.log("bad")
+                });
+        } else {
+            alert("заполните все поля");
+        }
     }
 
     handleNameChange(event) {
@@ -47,19 +51,20 @@ class NewItemView extends React.Component {
                 let info = res.data
                 if (info.Response != "False") {
                     document.querySelector("#posterImg").src = info.Poster;
-                    this.setState({ name: info.Title, genre: info.Genre, poster: info.Poster });
+                    this.setState({ name: info.Title, genre: info.Genre, poster: info.Poster, plot: info.Plot });
+                    this.type = info.Type == "movie" ? "movies" : "series";
                 }
             })
             .catch();
     }
     handleTrailerChange(event) { this.setState({ trailer: event.target.value }) }
     handleGenreChange(event) { this.setState({ genre: event.target.value }) }
-    handleDescriptionChange(event) { this.setState({ description: event.target.value }) }
+    handlePlotChange(event) { this.setState({ plot: event.target.value }) }
     handlePosterChange(event) {
         this.setState({ poster: event.target.value });
         document.querySelector("#posterImg").src = this.state.poster;
     }
-    handleTopicChange(event) { event.target.value == "Фильм" ? this.topic = "films" : this.topic = "series"; }
+    handleTypeChange(event) { event.target.value == "Movie" ? this.type = "movies" : this.type = "series"; }
     handleSearchChange(event) {
         if (event.target.checked) {
             document.querySelector("#manualSearch").style.display = "block";
@@ -73,10 +78,15 @@ class NewItemView extends React.Component {
 
         return (
             <div className="row">
-                <form id="form" className="col-7" onSubmit={this.handleSubmit}>
+                <form id="form" className="col-6 offset-1" onSubmit={this.handleSubmit}>
                     <div className="form-group">
                         <label htmlFor="name">Название фильма</label>
                         <input type="text" className="form-control" id="name" placeholder="Тихое место" onChange={this.handleNameChange} />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="trailer">Трейлер</label>
+                        <input type="text" className="form-control" id="trailer"
+                            placeholder="https://www.youtube.com/embed/J-G1rs7N-XE" onChange={this.handleTrailerChange} />
                     </div>
                     <div className="form-check">
                         <input className="form-check-input" type="checkbox" value="" id="search" onChange={this.handleSearchChange} />
@@ -96,10 +106,10 @@ class NewItemView extends React.Component {
                             </select>
                         </div>
                         <div className="form-group">
-                            <label htmlFor="topic">Категория</label>
-                            <select className="form-control" id="topic" onChange={this.handleTopicChange}>
-                                <option>Фильм</option>
-                                <option>Сериал</option>
+                            <label htmlFor="type">Категория</label>
+                            <select className="form-control" id="type" onChange={this.handleTypeChange}>
+                                <option>Movie</option>
+                                <option>Series</option>
                             </select>
                         </div>
                         <div className="form-group">
@@ -107,21 +117,16 @@ class NewItemView extends React.Component {
                             <input type="text" className="form-control" id="poster"
                                 placeholder="https://st.kp.yandex.net/images/film_iphone/iphone360_1044906.jpg" onChange={this.handlePosterChange} />
                         </div>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="trailer">Трейлер</label>
-                        <input type="text" className="form-control" id="trailer"
-                            placeholder="https://www.youtube.com/embed/J-G1rs7N-XE" onChange={this.handleTrailerChange} />
+                        <div className="form-group">
+                            <label htmlFor="plot" >Описание</label>
+                            <textarea className="form-control" id="plot" rows="4" onChange={this.handlePlotChange}></textarea>
+                        </div>
                     </div>
 
-                    <div className="form-group">
-                        <label htmlFor="description" >Описание</label>
-                        <textarea className="form-control" id="description" rows="4" onChange={this.handleDescriptionChange}></textarea>
-                    </div>
                     <button type="submit" className="btn btn-primary">Submit</button>
                 </form>
                 <div className="col-4">
-                    <img className="col-8" id="posterImg" src="https://st.kp.yandex.net/images/film_iphone/iphone360_1044906.jpg" alt="Постер" />
+                    <img className="col-10" id="posterImg" src="https://st.kp.yandex.net/images/film_iphone/iphone360_1044906.jpg" alt="Постер" />
                 </div>
             </div>
         )

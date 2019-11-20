@@ -16,8 +16,8 @@ class App extends React.Component {
         <Router>
           <HeaderComponent />
           <Route exact path="/" component={MainView} />
-          <Route exact path="/films" render={(props) => <ListView {...props} topic="films" />} />
-          <Route exact path="/series" render={(props) => <ListView {...props} topic="series" />} />
+          <Route exact path="/movies" render={(props) => <ListView {...props} type="movies" />} />
+          <Route exact path="/series" render={(props) => <ListView {...props} type="series" />} />
           <Route exact path="/addItem" component={NewItemView} />
         </Router>
       </div>

@@ -11,18 +11,17 @@ class ListView extends React.Component {
 
     state = {
         items: [],
-        isEmpty:true
     };
 
     constructor(props) {
         super(props);
-        this.state.topic = props.topic;
+        this.state.type = props.type;
     }
     componentDidMount(){  
-        if(this.state.topic){
-            getItems(this.state.topic)
+        if(this.state.type){
+            getItems(this.state.type)
             .then(res =>{
-                this.setState({items:res.data, isEmpty:false})
+                this.setState({items:res.data})
                 console.log(this.state.items)
             })
             .catch(rej =>{
@@ -35,7 +34,7 @@ class ListView extends React.Component {
 
    
     render() {
-        if(!this.state.isEmpty){
+        if(this.state.items.length!=0){
         return (
             <div>
                 <div className="row">
@@ -45,19 +44,19 @@ class ListView extends React.Component {
                         </div>
                     </div >
                     <div id="infoView" className="col-9 offset-3">
-                        <h3>Трейлер</h3>
-                        <iframe id="video" width="560" height="315" src=""
+                        <h3>Trailer</h3>
+                        <iframe id="video" width="700" height="400" src=""
                             frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; 
                             picture-in-picture" allowFullScreen></iframe>
-                        <h3>Описание</h3>
-                        <p id="description"></p>
+                        <h3>Plot</h3>
+                        <p id="plot"></p>
                     </div>
                 </div>
             </div>
 
         )
         } else{
-            return( <h2></h2>);
+        return( <h2>{this.state.type.toUpperCase()} list is empty</h2>);
         }
     }
 

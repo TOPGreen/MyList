@@ -34,7 +34,8 @@ class ListItem extends React.Component {
 
     showInfo = () => {
         document.querySelector("#video").src = this.state.item.trailer;
-        document.querySelector("#description").innerText = this.state.item.description;
+        document.querySelector("#plot").innerText = this.state.item.plot;
+        document.querySelector("#infoView").style.display = "block";
     }
 
 }
