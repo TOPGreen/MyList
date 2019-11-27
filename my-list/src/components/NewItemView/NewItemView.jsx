@@ -48,8 +48,9 @@ class NewItemView extends React.Component {
         getFilm(event.target.value)
             .then(res => {
                 console.log(res);
-                let info = res.data
+                let info = res.data;
                 if (info.Response != "False") {
+                    info = res.data["Search"][0];
                     document.querySelector("#posterImg").src = info.Poster;
                     this.setState({ name: info.Title, genre: info.Genre, poster: info.Poster, plot: info.Plot });
                     this.type = info.Type == "movie" ? "movies" : "series";
@@ -57,7 +58,11 @@ class NewItemView extends React.Component {
             })
             .catch();
     }
-    handleTrailerChange(event) { this.setState({ trailer: event.target.value }) }
+    handleTrailerChange(event) {
+        let link = event.target.value;
+        let embedLink = link.replace("watch?v=","embed/");
+        this.setState({ trailer: embedLink })
+    }
     handleGenreChange(event) { this.setState({ genre: event.target.value }) }
     handlePlotChange(event) { this.setState({ plot: event.target.value }) }
     handlePosterChange(event) {
