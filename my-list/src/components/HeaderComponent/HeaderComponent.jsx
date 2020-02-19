@@ -2,22 +2,35 @@ import React from 'react';
 import "bootstrap/dist/css/bootstrap.css";
 import { Link } from 'react-router-dom';
 import "./HeaderComponent.css"
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
 
 class HeaderComponent extends React.Component {
 
     render() {
         return (
-            <nav id="header" className="navbar navbar-expand-lg navbar-light bg-light">
-                <a className="navbar-brand">MyList</a>
-                <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div className="navbar-nav">
-                        <Link className="nav-item nav-link" to="/">Main</Link>
-                        <Link className="nav-item nav-link" to="/movies">Movies</Link>
-                        <Link className="nav-item nav-link" to="/series">Series</Link>
-                        <Link className="nav-item nav-link" to="/addItem">Add new item</Link>
-                    </div>
-                </div>
-            </nav>
+            <div className="header">
+                <AppBar position="static" color="inherit">
+                    <Toolbar>
+                        <Typography variant="h6">
+                            MyList
+                        </Typography>
+                        <Typography>
+                            <Link className="nav-item nav-link" to="/">Main</Link>
+                        </Typography >
+                        <Typography color='inherit'>
+                            <Link className="nav-item nav-link" to="/movies">Movies</Link>
+                        </Typography >
+                        <Typography color='inherit'>
+                            <Link className="nav-item nav-link" to="/series">Series</Link>
+                        </Typography >
+                        <Typography color='inherit'>
+                            <Link className="nav-item nav-link" to="/addItem">Add new item</Link>
+                        </Typography >
+                    </Toolbar>
+                </AppBar >
+            </div >
         )
     }
 

@@ -4,6 +4,16 @@ import { addItem } from "../../services/itemsService"
 import { getFilm } from '../../services/omdbService';
 import "./NewItemView.css"
 import { Redirect } from 'react-router-dom';
+import TextField from '@material-ui/core/TextField';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import Button from '@material-ui/core/Button';
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+
+
 class NewItemView extends React.Component {
 
     state = {
@@ -60,7 +70,7 @@ class NewItemView extends React.Component {
     }
     handleTrailerChange(event) {
         let link = event.target.value;
-        let embedLink = link.replace("watch?v=","embed/");
+        let embedLink = link.replace("watch?v=", "embed/");
         this.setState({ trailer: embedLink })
     }
     handleGenreChange(event) { this.setState({ genre: event.target.value }) }
@@ -83,52 +93,69 @@ class NewItemView extends React.Component {
 
         return (
             <div className="row">
-                <form id="form" className="col-6 offset-1" onSubmit={this.handleSubmit}>
+
+                <form id="form" className="col-6 offset-1" >
                     <div className="form-group">
-                        <label htmlFor="name">Название фильма</label>
-                        <input type="text" className="form-control" id="name" placeholder="Тихое место" onChange={this.handleNameChange} />
+                        <TextField id="name" label="title" onChange={this.handleNameChange} />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="trailer">Трейлер</label>
-                        <input type="text" className="form-control" id="trailer"
-                            placeholder="https://www.youtube.com/embed/J-G1rs7N-XE" onChange={this.handleTrailerChange} />
+                        <TextField id="trailer" label="trailer link" onChange={this.handleTrailerChange} />
                     </div>
                     <div className="form-check">
-                        <input className="form-check-input" type="checkbox" value="" id="search" onChange={this.handleSearchChange} />
-                        <label className="form-check-label" htmlFor="search">
-                            Заполнить вручную
-                        </label>
+                        <FormControlLabel
+                            control={
+                                <Checkbox id="search" onChange={this.handleSearchChange} />
+                            }
+                            label="Manually"
+                        />
                     </div>
                     <div id="manualSearch">
                         <div className="form-group">
-                            <label htmlFor="genre">Жанр</label>
-                            <select className="form-control" id="genre" onChange={this.handleGenreChange}>
-                                <option>Ужасы</option>
-                                <option>Комедия</option>
-                                <option>Триллер</option>
-                                <option>Боевик</option>
-                                <option>Фэнтези</option>
-                            </select>
+                            <FormControl >
+                                <InputLabel id="genre">Genre</InputLabel>
+                                <Select
+                                    labelId="genre"
+                                    id="genre"
+                                    value={this.state.genre}
+                                    onChange={this.handleGenreChange}
+                                >
+                                    <MenuItem value="horror">Horror</MenuItem>
+                                    <MenuItem value="comdey">Comedy</MenuItem>
+                                    <MenuItem value="triller">Triller</MenuItem>
+                                </Select>
+                            </FormControl>
                         </div>
                         <div className="form-group">
-                            <label htmlFor="type">Категория</label>
-                            <select className="form-control" id="type" onChange={this.handleTypeChange}>
-                                <option>Movie</option>
-                                <option>Series</option>
-                            </select>
+                            <FormControl >
+                                <InputLabel id="type">Type</InputLabel>
+                                <Select
+                                    labelId="type"
+                                    id="type"
+                                    value={this.state.type}
+                                    onChange={this.handleTypeChange}
+                                >
+                                    <MenuItem value="movie">Movie</MenuItem>
+                                    <MenuItem value="series">Series</MenuItem>
+                                </Select>
+                            </FormControl>
                         </div>
                         <div className="form-group">
-                            <label htmlFor="poster">Постер</label>
-                            <input type="text" className="form-control" id="poster"
-                                placeholder="https://st.kp.yandex.net/images/film_iphone/iphone360_1044906.jpg" onChange={this.handlePosterChange} />
+                            <TextField id="trailer" label="poster link" id="poster" onChange={this.handlePosterChange} />
                         </div>
                         <div className="form-group">
-                            <label htmlFor="plot" >Описание</label>
-                            <textarea className="form-control" id="plot" rows="4" onChange={this.handlePlotChange}></textarea>
+                            <TextField
+                                id="plot"
+                                label="Description"
+                                multiline
+                                rows="4"
+                                variant="filled"
+                                onChange={this.handlePlotChange}
+                            />
                         </div>
                     </div>
-
-                    <button type="submit" className="btn btn-primary">Submit</button>
+                    <Button variant="contained" color="primary" onClick={this.handleSubmit}>
+                        Submit
+                    </Button>
                 </form>
                 <div className="col-4">
                     <img className="col-10" id="posterImg" src="https://st.kp.yandex.net/images/film_iphone/iphone360_1044906.jpg" alt="Постер" />

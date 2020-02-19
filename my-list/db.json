@@ -47,6 +47,12 @@
       "trailer": "https://www.youtube.com/embed/zAGVQLHvwOY",
       "poster": "https://m.media-amazon.com/images/M/MV5BNGVjNWI4ZGUtNzE0MS00YTJmLWE0ZDctN2ZiYTk2YmI3NTYyXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg",
       "id": 7
+    },
+    {
+      "name": "Ford v Ferrari",
+      "trailer": "https://www.youtube.com/embed/fAD-D3P-s0I",
+      "poster": "https://m.media-amazon.com/images/M/MV5BYzcyZDNlNDktOWRhYy00ODQ5LTg1ODQtZmFmZTIyMjg2Yjk5XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg",
+      "id": 8
     }
   ],
   "series": [
